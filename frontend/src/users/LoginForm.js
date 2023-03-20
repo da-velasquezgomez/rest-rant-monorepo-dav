@@ -16,22 +16,22 @@ function LoginForm() {
     const [errorMessage, setErrorMessage] = useState(null)
 
     async function handleSubmit(e) {
-        e.preventDefault()
-    const response = await fetch (`http://localhost:5555/authentication/`,{
+    const response = await fetch(`http://localhost:5555/authentication/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(credentials)
     })
+
     const data = await response.json()
-    
+
     if (response.status === 200) {
         setCurrentUser(data.user)
-        history.push('/')
+        localStorage.setItem('token', 'data.token')
+        history.push(`/`)
     } else {
         setErrorMessage(data.message)
-    }
     }
 
     return (
